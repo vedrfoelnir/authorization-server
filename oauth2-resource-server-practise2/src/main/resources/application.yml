@@ -1,0 +1,12 @@
+server.port: 8092
+
+spring:
+    application.name: backend-resources1
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: http://localhost:8080/auth/realms/studropica
+                    jwk-set-uri: http://localhost:8080/auth/realms/studropica/protocol/openid-connect/certs
+
+

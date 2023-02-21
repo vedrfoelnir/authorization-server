@@ -1,0 +1,37 @@
+server:
+  port: 8090
+
+spring:
+  application.name: backend-gateway-client
+  cloud:
+    gateway:
+      httpclient:
+        wiretap: true
+      httpserver:
+        wiretap: true
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+      routes:
+        - id: resources1
+          uri: http://localhost:8091
+          predicates:
+            Path=/api1/**
+        - id: resources2
+          uri: http://localhost:8092
+          predicates:
+            Path=/api2/**
+
+logging:
+  level:
+    reactor:
+      netty: INFO
+    org:
+      springframework:
+        cloud:
+          gateway: TRACE
